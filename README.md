@@ -4,7 +4,7 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Build Status](https://img.shields.io/travis/esbenp/bruno/master.svg?style=flat-square)](https://travis-ci.org/esbenp/bruno)
 [![Coverage Status](https://img.shields.io/coveralls/esbenp/bruno.svg?style=flat-square)](https://coveralls.io/github/esbenp/bruno)
-[![Total Downloads](https://img.shields.io/packagist/dt/optimus/bruno.svg?style=flat-square)](https://packagist.org/packages/optimus/bruno)
+[![Total Downloads](https://img.shields.io/packagist/dt/dungld/bruno.svg?style=flat-square)](https://packagist.org/packages/dungld/bruno)
 
 ## Introduction
 
@@ -21,7 +21,7 @@ For his ideas and his refusal to renounce them he was burned to the stake in 160
 
 * Parse GET parameters for dynamic eager loading of related resources, sorting and pagination
 * Advanced filtering of resources using filter groups
-* Use [Optimus\Architect](https://github.com/esbenp/architect) for sideloading, id loading or embedded loading of related resources
+* Use [Dungld\Architect](https://github.com/esbenp/architect) for sideloading, id loading or embedded loading of related resources
 * ... [Ideas for new functionality is welcome here](https://github.com/esbenp/bruno/issues/new)
 
 ## Tutorial
@@ -33,12 +33,12 @@ To get started with Bruno I highly recommend my article on
 
 For Laravel 5.3 and below
 ```bash
-composer require optimus/bruno ~2.0
+composer require dungld/bruno ~2.0
 ```
 
 For Laravel 5.4 and above
 ```bash
-composer require optimus/bruno ~3.0
+composer require dungld/bruno ~3.0
 ```
 
 ## Usage
@@ -67,8 +67,8 @@ Filter_groups | array | Array of filter groups. See below for syntax.
 
 namespace App\Http\Controllers;
 
-use Optimus\Api\Controller\EloquentBuilderTrait;
-use Optimus\Api\Controller\LaravelController;
+use Dungld\Api\Controller\EloquentBuilderTrait;
+use Dungld\Api\Controller\LaravelController;
 use App\Models\Book;
 
 class BookController extends LaravelController
@@ -86,7 +86,7 @@ class BookController extends LaravelController
         $this->applyResourceOptions($query, $resourceOptions);
         $books = $query->get();
 
-        // Parse the data using Optimus\Architect
+        // Parse the data using Dungld\Architect
         $parsedData = $this->parseData($books, $resourceOptions, 'books');
 
         // Create JSON response of parsed data
@@ -118,7 +118,7 @@ Will return a collection of `Book`s eager loaded with the ID of their `Author`
 Will return a collection of `Book`s and a eager loaded collection of their
 `Author`s in the root scope.
 
-[See mere about eager loading types in Optimus\Architect's README](https://github.com/esbenp/architect)
+[See mere about eager loading types in Dungld\Architect's README](https://github.com/esbenp/architect)
 
 ### Pagination
 
@@ -211,7 +211,7 @@ filter books by `Author` name.
         "filters": [
             {
                 "key": "author",
-                "value": "Optimus",
+                "value": "Dungld",
                 "operator": "sw"
             }
         ]
@@ -263,7 +263,7 @@ $in | Boolean indicating whether or not this is an in-array filter
         "filters": [
             {
                 "key": "author",
-                "value": "Optimus",
+                "value": "Dungld",
                 "operator": "sw"
             },
             {
@@ -276,7 +276,7 @@ $in | Boolean indicating whether or not this is an in-array filter
 ]
 ```
 
-Books with authors whoose name start with `Optimus` or ends with `Prime`.
+Books with authors whoose name start with `Dungld` or ends with `Prime`.
 
 ```json
 [
@@ -320,7 +320,7 @@ For example, this group of filters (Verbose)
         "filters": [
             {
                 "key": "author",
-                "value": "Optimus",
+                "value": "Dungld",
                 "operator": "sw"
             },
             {
@@ -344,7 +344,7 @@ May be expressed in this manner (Shorthand)
     {
         "or": false,
         "filters": [
-            ["author", "sw", "Optimus"],
+            ["author", "sw", "Dungld"],
             ["author", "ew", "Prime"],
             ["deleted_at", "eq", null, true]
         ]
